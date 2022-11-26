@@ -1,35 +1,30 @@
 package br.com.ada;
 
-import br.com.ada.livraria.model.Carrinho;
-import br.com.ada.livraria.model.Livro;
-import br.com.ada.livraria.model.Produto;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import br.com.ada.jogodecartas.Deck;
+import br.com.ada.jogodecartas.Tabuleiro;
+import br.com.ada.jogodecartas.factory.GameFactory;
+import br.com.ada.jogodecartas.factory.TeamGameFactory;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        List<String> lista = new ArrayList<>(2);
+        /*
+        TabuleiroVersus tabuleiroVersus = new TabuleiroVersus();
+        DeckVersus deckVersus = new DeckVersus();
+        DeckParty deckParty = new DeckParty();
 
-        Produto p1 = new Livro();
-        p1.setId(1);
-        p1.setPreco(BigDecimal.TEN);
+        tabuleiroVersus.adicionarDeck(deckVersus);
+        tabuleiroVersus.adicionarDeck(deckParty);
+         */
 
+        GameFactory gameFactory = new TeamGameFactory();
+        Tabuleiro tabuleiro = gameFactory.criarTabuleiro();
+        Deck deck = gameFactory.criarDeck();
+        tabuleiro.adicionarDeck(deck);
 
-        Carrinho carrinho = new Carrinho();
-        carrinho.adicionarItem(p1);
-        carrinho.adicionarItem(p1);
-        carrinho.adicionarItem(p1);
-        carrinho.removerProduto(p1);
-
-        carrinho.obterItemsDoCarrinho().entrySet().stream()
-                .forEach(e -> {
-                    System.out.println(e.getValue() + " x " + e.getKey().getPreco() + " = " );
-                });
-
+        System.out.println(tabuleiro.limiteDeDecks());
+        System.out.println(deck.limiteDeCartas());
     }
 
 }
